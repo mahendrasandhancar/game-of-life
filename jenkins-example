@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "vinod9782/inspired"
+    registry = "mahendrasandhancar/games"
     registryCredential = 'dockerhub'
     dockerImage = ''
   }    
@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/hrmanth/game-of-life.git'
+        git 'https://github.com/mahendrasandhancar/game-of-life.git'
       }
     }
         stage('Build'){
@@ -36,7 +36,7 @@ pipeline {
     stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
-        sh "docker run -d --name Inspiredit9 -p 8088:8080 vinod9782/inspired:$BUILD_NUMBER"
+        sh "docker run -d --name pipeline -p 8088:8080 mahendrasandhancar/game:$BUILD_NUMBER"
         
       }
     }     
